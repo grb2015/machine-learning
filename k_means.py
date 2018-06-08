@@ -111,7 +111,7 @@ def showCluster(centroidList, clusterDict):
   
 if __name__ == '__main__':  
   
-    inFile = "test.txt"  # 数据集文件  
+    inFile = "k_means_test.txt"  # 数据集文件  
     dataSet = loadDataSet(inFile)  # 载入数据集  
     #print('###### dataSet = ',dataSet)
     
