@@ -31,6 +31,7 @@ print(X)
 print('Y = ')
 print(Y)
 predictvalue = 700  
+predictvalue = np.array(predictvalue).reshape(1, -1) # guo modified for origan 必须做成一个二维数组
 result = linear_model_main(X,Y,predictvalue)  
 print( "截距 Intercept value " , result['intercept']  ) #截距
 print( "系数 coefficient" , result['coefficient']  ) #系数
