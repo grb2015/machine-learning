@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
+'''
+线性回归 根据房子的面积预测售价
+官方文档： https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+'''
 
 import matplotlib.pyplot as plt  
 import numpy as np  
 import pandas as pd  
 from sklearn import datasets, linear_model  
-# 读取数据 
+
+######################################################################
+'''
+    brief   :   读取数据
+    input   :   file_name      csv文件的路径
+    returns :   X_parameter    [list]      自变量的数组  
+                Y_parameter    [list]      因变量的数组  
+'''
+######################################################################
 def get_data(file_name):  
     data = pd.read_csv(file_name)  #用pandas 读取cvs 文件.  
     X_parameter = [] 
@@ -14,29 +26,43 @@ def get_data(file_name):
         Y_parameter.append(float(single_price_value))  
     return X_parameter,Y_parameter
 
-#Function for Fitting our data to Linear model  
-def linear_model_main(X_parameters,Y_parameters,predict_value):
+
+######################################################################
+'''
+    brief   :   线性回归模型的训练  Function for Fitting our data to Linear model  
+    input   :   X_parameters    [list]      自变量的数组
+                Y_parameters    [list]      因变量的数组
+    returns :   regr            [sklearn的LinearRegression对象]    训练好的模型
+'''
+######################################################################
+def linear_model_train(X_parameters,Y_parameters):
     regr = linear_model.LinearRegression()  
     regr.fit(X_parameters, Y_parameters)   #训练模型  
-    predict_outcome = regr.predict(predict_value)  
-    predictions = {}  
-    predictions['intercept'] = regr.intercept_  
-    predictions['coefficient'] = regr.coef_  
-    predictions['predicted_value'] = predict_outcome  
-    return predictions
+    return regr
 
+# step1 读取数据
 X,Y = get_data('input_data.csv')  
-print('X = ')
-print(X)
-print('Y = ')
-print(Y)
-predictvalue = 700  
-predictvalue = np.array(predictvalue).reshape(1, -1) # guo modified for origan 必须做成一个二维数组
-result = linear_model_main(X,Y,predictvalue)  
-print( "截距 Intercept value " , result['intercept']  ) #截距
-print( "系数 coefficient" , result['coefficient']  ) #系数
-print( "Predicted value: ",result['predicted_value'])
+# step2 模型训练
+regr = linear_model_train(X,Y) 
 
+# step3 预测
+predx = 700  #待预测的值 
+predX = np.array(predx).reshape(1, -1) # guo modified for origan 必须做成一个二维数组
+predY = regr.predict(predX)
+
+# 打印log 
+# print('X = ')
+# print(X)
+# print('Y = ')
+# print(Y)
+print( "待预测的值 predX = ") 
+print(predX)
+print( "截距 Intercept value " , regr.intercept_   ) #截距
+print( "系数 coefficient" , regr.coef_  ) #系数
+print( "预测值 Predicted value: ")
+print(predY)
+
+# 绘图
 # Function to show the resutls of linear fit model  
 def show_linear_line(X_parameters,Y_parameters):  
     regr = linear_model.LinearRegression()  
