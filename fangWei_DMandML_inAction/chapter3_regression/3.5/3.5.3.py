@@ -1,7 +1,7 @@
 import quandl
 from sklearn import preprocessing
 #df = quandl.get('WIKI/GOOGL')
-df = quandl.get('WIKI/AAPL')
+df = quandl.get('WIKI/AAPL')  # bg added 20191126 要先去quandl网站注册key
 import math
 import numpy as np
 # 定义预测列变量，它存放研究对象的标签名
@@ -22,8 +22,9 @@ df.fillna(-99999, inplace=True)
 # 用label代表该字段，是预测结果
 # 通过让与Adj. Close列的数据往前移动1%行来表示
 df['label'] = df[forecast_col].shift(-forecast_out)
-# 最后生成真正在模型中使用的数据X和y和预测时用到的数据数据X_lately
+# bg added 20191126 最后生成真正在模型中使用的数据X和y和预测时用到的数据数据X_lately
 X = np.array(df.drop(['label'], 1))
+# 对自变量进行规范化处理，使之服从正态分布
 X = preprocessing.scale(X)
 # 上面生成label列时留下的最后1%行的数据，这些行并没有label数据，因此我们可以拿他们作为预测时用到的输入数据
 X_lately = X[-forecast_out:]
