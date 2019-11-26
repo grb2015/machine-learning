@@ -28,28 +28,33 @@ L1 = [x[0] for x in X]
 L2 = [x[1] for x in X]
 #print (L2)
 
-	#绘图
-plt.scatter(X[:50, 0], X[:50, 1], color='red', marker='o', label='setosa')
-plt.scatter(X[50:100, 0], X[50:100, 1], color='blue', marker='x', label='versicolor')
-plt.scatter(X[100:, 0], X[100:, 1], color='green', marker='s', label='Virginica')
-plt.title("DTC")
-plt.xlabel('Sepal length')
-plt.ylabel('Sepal width')
+    # 绘图  bg added 20191126  Q1 这里并没有用到什么预测，只是对原数据绘图吧?
+# plt.scatter(X[:50, 0], X[:50, 1], color='red', marker='o', label='setosa')
+# plt.scatter(X[50:100, 0], X[50:100, 1], color='blue', marker='x', label='versicolor')
+# plt.scatter(X[100:, 0], X[100:, 1], color='green', marker='s', label='Virginica')
+# plt.title("DTC")
+# plt.xlabel('Sepal length')
+# plt.ylabel('Sepal width')
 
-plt.xticks(())
-plt.yticks(())
-plt.legend(loc=2)
-plt.show()
+# plt.xticks(())
+# plt.yticks(())
+# plt.legend(loc=2)
+# plt.show()
 
+
+
+#bg added 20191126 下面的代码与预测与无关,只是对数据的特点进行绘图分析
 import pandas
 #导入数据集iris
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
-names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-dataset = pandas.read_csv(url, names=names) #读取csv数据
-print(dataset.describe())
+# url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+# names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+# print("before read url")
+# dataset = pandas.read_csv(url, names=names) #读取csv数据
+# print("after  read url")
+# print(dataset.describe())
 #直方图 histograms
-dataset.hist()
-plt.show()
+# dataset.hist()
+# plt.show()
 
 
 # viz code 可视化 制作一个简单易读的PDF
@@ -57,6 +62,7 @@ from sklearn.externals.six import StringIO
 import pydot
 
 dot_data = StringIO()
+# bg added 20191126 这里才是真的用训练好的模型进行预测
 tree.export_graphviz(clf, out_file=dot_data,
                      feature_names=iris.feature_names,
                      class_names=iris.target_names,

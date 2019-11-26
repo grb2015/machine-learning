@@ -145,5 +145,5 @@ class logRegressClassifier(object):
         else:
             return 0.0
 
-if __name__ == '__main__':
-    lr = logRegressClassifier()
+# if __name__ == '__main__':
+#     lr = logRegressClassifier()
