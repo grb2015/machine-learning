@@ -2,6 +2,7 @@
 
 # 引入数据集
 
+# bg added 20191126 运行出错 FileNotFoundError: [WinError 2] "dot" not found in path.
 from sklearn.datasets import load_iris
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier      #导入决策树DTC包

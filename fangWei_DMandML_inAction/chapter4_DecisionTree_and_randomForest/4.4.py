@@ -6,6 +6,7 @@ from sklearn import ensemble
 from sklearn.metrics import mean_squared_error
 import pylab as plot
 
+# bg added 20191126  算法的目的是  求出各个特征的重要度，即品质好的葡萄酒与那些因素相关性比较大。
 #从网页中读取数据
 url="http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
 data=urllib.request.urlopen(url)
@@ -60,7 +61,7 @@ plot.xlabel("number of trees")
 plot.ylabel("fang cha")
 plot.show()
 
-#用feature_importances_方法提取属性重要性numpy数组
+#用feature_importances_方法提取属性重要性numpy数组  #bg added 20191126 winerandomforestmodel是训练好的模型
 featureimportance=winerandomforestmodel.feature_importances_
 #归一化
 featureimportance=featureimportance/featureimportance.max()
