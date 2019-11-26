@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-import seaborn as sns
+# import seaborn as sns
 # read csv file directly from a URL and save the results
 data = pd.read_csv('./Advertising.csv', index_col=0)
 
