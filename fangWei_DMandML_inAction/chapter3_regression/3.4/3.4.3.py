@@ -3,7 +3,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 import numpy as np
@@ -21,40 +21,42 @@ X = data[feature_cols]
 X = data[['TV', 'radio', 'newspaper']]
 
 # 输出前五项数据
-print(X.head())
-print(type(X))
-print(X.shape)
+# print(X.head())
+# print(type(X))
+# print(X.shape)
 
 #从DataFrame中选择一个Series
 y = data['sales']
 y = data.sales
 
 # 输出前五项数据
-print(y.head())
+# print(y.head())
 
-print(type(y))
-print(y.shape)
+# print(type(y))
+# print(y.shape)
 
 #构建训练集和测试集，分别保存在X_train，y_train，Xtest，y_test
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
-print (X_train.shape)
-print (y_train.shape)
-print (X_test.shape)
-print (y_test.shape)
+# print (X_train.shape)
+# print (y_train.shape)
+# print (X_test.shape)
+# print (y_test.shape)
 
 linreg = LinearRegression()
 linreg.fit(X_train, y_train)
-LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
-print (linreg.intercept_)
-print (linreg.coef_)
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)  # Q1 : 这句话的作用是什么?去掉结果也是正确的
+print ("linreg.intercept_ = ",linreg.intercept_)
+print ("linreg.coef_ ",linreg.coef_)
 
 # 将特征名称与系数对应
-zip(feature_cols, linreg.coef_)
+zip(feature_cols, linreg.coef_)  # Q2 : 这句话的作用是什么?去掉结果也是正确的
 
 y_pred = linreg.predict(X_test)
 
-print (np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+# 打印预测误差
+print ("mean_squared_error = ",np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
+# 绘图
 plt.figure()
 plt.plot(range(len(y_pred)),y_pred,'b',label="predict")
 plt.plot(range(len(y_pred)),y_test,'r',label="test")
