@@ -1,3 +1,4 @@
+# ref : https://scikit-learn.org/stable/modules/tree.html
 from sklearn.datasets import load_iris
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree.export import export_text
